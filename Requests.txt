@@ -1,0 +1,203 @@
+Reconocimiento:
+
+Host/OS information: Win32_OperatingSystem, Win32_ComputerSystem
+File/directory listing: CIM_DataFile
+Disk volume listing: Win32_Volume
+Registry operations: StdRegProv
+Running processes: Win32_Process
+Service listing: Win32_Service
+Event log: Win32_NtLogEvent
+Logged on accounts: Win32_LoggedOnUser
+Mounted shares: Win32_Share
+Installed patches: Win32_QuickFixEngineering
+Win32_NetworkAdapterConfiguration
+
+
+*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+require 'win32ole'
+win = wmi.ExecQuery("select * from Win32_SystemUsers")
+
+for cosa in win do
+for property in cosa.Properties_ do
+puts property.Name
+end
+break
+end
+
+
+win.each do |cosa|
+puts cosa.inspect
+puts "Win32_LogonSession: #{cosa.Win32_LogonSession}"
+puts "Win32_Account: #{cosa.Win32_Account}"
+end
+
+
+*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*
+
+
+Win32_OperatingSystem:
+
+CSName: IE8WIN7
+Caption: Microsoft Windows 7 Enterprise
+CSDVersion: Service Pack 1
+BuildNumber: 7601
+OSArchitecture: 32-bit
+WindowsDirectory: C:\Windows
+OSLanguage: 1033
+CurrentTimeZone: -420
+CountryCode: 1
+InstallDate: 20131023092244.000000-420
+LastBootUpTime: 20171102175924.977625-420
+LocalDateTime: 20171102181133.665000-420
+
+
+
+
+
+Win32_ComputerSystem:
+
+DNSHostName: IE8Win7
+Domain: WORKGROUP
+DomainRole: 0
+EnableDaylightSavingsTime: true
+LastLoadInfo:
+Manufacturer: innotek GmbH
+Model: VirtualBox
+TotalPhysicalMemory: 1073274880
+UserName: IE8Win7\IEUser
+Workgroup: WORKGROUP
+
+
+
+
+Win32_LoggedOnUser:
+GroupComponent: \\IE8WIN7\root\cimv2:Win32_ComputerSystem.Name="IE8WIN7"
+PartComponent: \\IE8WIN7\root\cimv2:Win32_UserAccount.Name="Administrator",Domain="IE8WIN7"
+GroupComponent: \\IE8WIN7\root\cimv2:Win32_ComputerSystem.Name="IE8WIN7"
+PartComponent: \\IE8WIN7\root\cimv2:Win32_UserAccount.Name="carlos",Domain="IE8WIN7"
+GroupComponent: \\IE8WIN7\root\cimv2:Win32_ComputerSystem.Name="IE8WIN7"
+PartComponent: \\IE8WIN7\root\cimv2:Win32_UserAccount.Name="Guest",Domain="IE8WIN7"
+GroupComponent: \\IE8WIN7\root\cimv2:Win32_ComputerSystem.Name="IE8WIN7"
+PartComponent: \\IE8WIN7\root\cimv2:Win32_UserAccount.Name="HomeGroupUser$",Domain="IE8WIN7"
+GroupComponent: \\IE8WIN7\root\cimv2:Win32_ComputerSystem.Name="IE8WIN7"
+PartComponent: \\IE8WIN7\root\cimv2:Win32_UserAccount.Name="IEUser",Domain="IE8WIN7"
+
+win = wmi.ExecQuery("select * from Win32_SystemUsers")
+win.each do |cosa|
+puts "GroupComponent: #{cosa.GroupComponent}"
+puts "PartComponent: #{cosa.PartComponent}"
+end
+
+
+
+Win32_UserAccount
+
+
+win = wmi.ExecQuery("select * from Win32_UserAccount")
+win.each do |cosa|
+
+puts "AccountType: #{cosa.AccountType}"
+puts "Caption: #{cosa.Caption}"
+puts "Description: #{cosa.Description}"
+puts "Disabled: #{cosa.Disabled}"
+puts "Domain: #{cosa.Domain}"
+puts "FullName: #{cosa.FullName}"
+puts "InstallDate: #{cosa.InstallDate}"
+puts "LocalAccount: #{cosa.LocalAccount}"
+puts "Lockout: #{cosa.Lockout}"
+puts "Name: #{cosa.Name}"
+puts "PasswordChangeable: #{cosa.PasswordChangeable}"
+puts "PasswordExpires: #{cosa.PasswordExpires}"
+puts "PasswordRequired: #{cosa.PasswordRequired}"
+puts "SID: #{cosa.SID}"
+puts "SIDType: #{cosa.SIDType}"
+puts "Status: #{cosa.Status}"
+end
+
+
+
+
+
+Win32_Group
+
+win = wmi.ExecQuery("select * from Win32_Group Where LocalAccount = True")
+win.each do |cosa|
+
+puts "Caption: #{cosa.Caption}"
+puts "Description: #{cosa.Description}"
+puts "InstallDate: #{cosa.InstallDate}"
+puts "Status: #{cosa.Status}"
+puts "LocalAccount: #{cosa.LocalAccount}"
+puts "SID: #{cosa.SID}"
+puts "SIDType: #{cosa.SIDType}"
+puts "Domain: #{cosa.Domain}"
+puts "Name: #{cosa.Name}"
+end
+
+
+
+
+
+
+
+
+
+
+
+Win32_NetworkAdapterConfiguration
+
+win = wmi.ExecQuery("select * from Win32_NetworkAdapterConfiguration Where IPEnabled = True")
+win.each do |cosa|
+
+puts "Caption: #{cosa.Caption}"
+puts "Description: #{cosa.Description}"
+puts "SettingID: #{cosa.SettingID}"
+puts "ArpAlwaysSourceRoute: #{cosa.ArpAlwaysSourceRoute}"
+puts "ArpUseEtherSNAP: #{cosa.ArpUseEtherSNAP}"
+puts "DatabasePath: #{cosa.DatabasePath}"
+puts "DeadGWDetectEnabled: #{cosa.DeadGWDetectEnabled}"
+puts "DefaultTOS: #{cosa.DefaultTOS}"
+puts "DefaultTTL: #{cosa.DefaultTTL}"
+puts "DHCPEnabled: #{cosa.DHCPEnabled}"
+puts "DHCPLeaseExpires: #{cosa.DHCPLeaseExpires}"
+puts "DHCPLeaseObtained: #{cosa.DHCPLeaseObtained}"
+puts "DHCPServer: #{cosa.DHCPServer}"
+puts "DNSDomain: #{cosa.DNSDomain}"
+puts "DNSEnabledForWINSResolution: #{cosa.DNSEnabledForWINSResolution}"
+puts "DNSHostName: #{cosa.DNSHostName}"
+puts "DomainDNSRegistrationEnabled: #{cosa.DomainDNSRegistrationEnabled}"
+puts "ForwardBufferMemory: #{cosa.ForwardBufferMemory}"
+puts "FullDNSRegistrationEnabled: #{cosa.FullDNSRegistrationEnabled}"
+puts "IGMPLevel: #{cosa.IGMPLevel}"
+puts "Index: #{cosa.Index}"
+puts "InterfaceIndex: #{cosa.InterfaceIndex}"
+puts "IPConnectionMetric: #{cosa.IPConnectionMetric}"
+puts "IPEnabled: #{cosa.IPEnabled}"
+puts "IPFilterSecurityEnabled: #{cosa.IPFilterSecurityEnabled}"
+puts "IPPortSecurityEnabled: #{cosa.IPPortSecurityEnabled}"
+puts "IPUseZeroBroadcast: #{cosa.IPUseZeroBroadcast}"
+puts "IPXAddress: #{cosa.IPXAddress}"
+puts "IPXEnabled: #{cosa.IPXEnabled}"
+puts "IPXMediaType: #{cosa.IPXMediaType}"
+puts "IPXVirtualNetNumber: #{cosa.IPXVirtualNetNumber}"
+puts "KeepAliveInterval: #{cosa.KeepAliveInterval}"
+puts "KeepAliveTime: #{cosa.KeepAliveTime}"
+puts "MACAddress: #{cosa.MACAddress}"
+puts "MTU: #{cosa.MTU}"
+puts "NumForwardPackets: #{cosa.NumForwardPackets}"
+puts "PMTUBHDetectEnabled: #{cosa.PMTUBHDetectEnabled}"
+puts "PMTUDiscoveryEnabled: #{cosa.PMTUDiscoveryEnabled}"
+puts "ServiceName: #{cosa.ServiceName}"
+puts "TcpipNetbiosOptions: #{cosa.TcpipNetbiosOptions}"
+puts "TcpMaxConnectRetransmissions: #{cosa.TcpMaxConnectRetransmissions}"
+puts "TcpMaxDataRetransmissions: #{cosa.TcpMaxDataRetransmissions}"
+puts "TcpNumConnections: #{cosa.TcpNumConnections}"
+puts "TcpUseRFC1122UrgentPointer: #{cosa.TcpUseRFC1122UrgentPointer}"
+puts "TcpWindowSize: #{cosa.TcpWindowSize}"
+puts "WINSEnableLMHostsLookup: #{cosa.WINSEnableLMHostsLookup}"
+puts "WINSHostLookupFile: #{cosa.WINSHostLookupFile}"
+puts "WINSPrimaryServer: #{cosa.WINSPrimaryServer}"
+puts "WINSScopeID: #{cosa.WINSScopeID}"
+puts "WINSSecondaryServer: #{cosa.WINSSecondaryServer}"
+
+end
