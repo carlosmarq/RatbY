@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :servers do
     collection do
       post 'listen'
+      post 'listenu'
     end
   end
   #devise_for :models

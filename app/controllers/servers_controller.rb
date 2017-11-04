@@ -1,6 +1,6 @@
 class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery :except => [:listen]
+  protect_from_forgery :except => [:listen, :listenu]
 
   CookieSec = "123456789"
 
@@ -70,7 +70,6 @@ class ServersController < ApplicationController
       puts "Authorized"
 
       @server = Server.new(server_params)
-
       respond_to do |format|
         if @server.save
           format.html { redirect_to @server, notice: 'Server was successfully created.' }
@@ -81,7 +80,23 @@ class ServersController < ApplicationController
         end
       end
 
+    else
+      puts "Not Authorized"
+    end
 
+  end
+
+  def listenu
+
+    if request.headers["Cookie"].to_s == CookieSec
+      puts "Authorized"
+
+      @user = User.new(user_params)
+      @user.server = Server.find_by "hostname", user_params[:hostname]
+      puts ""
+      puts @user.server
+      puts ""
+      @user.save
     else
       puts "Not Authorized"
     end
@@ -89,17 +104,25 @@ class ServersController < ApplicationController
   end
 
 
-    private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_server
-      @server = Server.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def server_params
-      params.require(:server).permit(:hostname, :Caption, :CSDVersion, :BuildNumber, :OSArchitecture, :WindowsDirectory, :OSLanguage, :CurrentTimeZone, :CountryCode, :InstallDate, :LastBootUpTime, :LocalDateTime)
-    end
-
-
-
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_server
+    @server = Server.find(params[:id])
   end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def server_params
+    params.require(:server).permit(:hostname, :Caption, :CSDVersion,
+      :BuildNumber, :OSArchitecture, :WindowsDirectory, :OSLanguage,
+      :CurrentTimeZone, :CountryCode, :InstallDate, :LastBootUpTime,
+      :LocalDateTime)
+  end
+
+
+  def user_params
+        params.require(:server).permit(:hostname, :Caption, :Description, :Disabled,
+        :FullName, :LocalAccount, :Lockout, :Name,
+        :PasswordChangeable, :PasswordExpires, :PasswordRequired,
+        :SID)
+  end
+end

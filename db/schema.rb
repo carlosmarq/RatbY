@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031214413) do
+ActiveRecord::Schema.define(version: 20171104154400) do
 
   create_table "servers", force: :cascade do |t|
     t.string "hostname"
@@ -27,6 +27,25 @@ ActiveRecord::Schema.define(version: 20171031214413) do
     t.string "LocalDateTime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "hostname"
+    t.string "Caption"
+    t.string "Description"
+    t.string "Disabled"
+    t.string "FullName"
+    t.string "LocalAccount"
+    t.string "Lockout"
+    t.string "Name"
+    t.string "PasswordChangeable"
+    t.string "PasswordExpires"
+    t.string "PasswordRequired"
+    t.string "SID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "server_id"
+    t.index ["server_id"], name: "index_users_on_server_id"
   end
 
 end
