@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Hostname</th>
-      <th>Description</th>
+      <th>Caption</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
     <% @servers.each do |server| %>
       <tr>
         <td><%= server.hostname %></td>
-        <td><%= server.description %></td>
+        <td><%= server.Caption %></td>
         <td><%= link_to 'Show', server %></td>
         <td><%= link_to 'Edit', edit_server_path(server) %></td>
         <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>

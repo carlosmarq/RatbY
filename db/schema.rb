@@ -14,7 +14,17 @@ ActiveRecord::Schema.define(version: 20171031214413) do
 
   create_table "servers", force: :cascade do |t|
     t.string "hostname"
-    t.string "description"
+    t.string "Caption"
+    t.string "CSDVersion"
+    t.string "BuildNumber"
+    t.string "OSArchitecture"
+    t.string "WindowsDirectory"
+    t.string "OSLanguage"
+    t.string "CurrentTimeZone"
+    t.string "CountryCode"
+    t.string "InstallDate"
+    t.string "LastBootUpTime"
+    t.string "LocalDateTime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

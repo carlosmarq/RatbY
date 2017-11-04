@@ -2,7 +2,7 @@ class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
   protect_from_forgery :except => [:listen]
 
-
+  CookieSec = "123456789"
 
   # GET /servers
   # GET /servers.json
@@ -66,18 +66,25 @@ class ServersController < ApplicationController
 
   def listen
 
-    @server = Server.new(server_params)
+    if request.headers["Cookie"].to_s == CookieSec
+      puts "Authorized"
 
-    respond_to do |format|
-      if @server.save
-        format.html { redirect_to @server, notice: 'Server was successfully created.' }
-        format.json { render :show, status: :created, location: @server }
-      else
-        format.html { render :new }
-        format.json { render json: @server.errors, status: :unprocessable_entity }
+      @server = Server.new(server_params)
+
+      respond_to do |format|
+        if @server.save
+          format.html { redirect_to @server, notice: 'Server was successfully created.' }
+          format.json { render :show, status: :created, location: @server }
+        else
+          format.html { render :new }
+          format.json { render json: @server.errors, status: :unprocessable_entity }
+        end
       end
-    end
 
+
+    else
+      puts "Not Authorized"
+    end
 
   end
 
@@ -90,7 +97,7 @@ class ServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def server_params
-      params.require(:server).permit(:hostname, :description)
+      params.require(:server).permit(:hostname, :Caption, :CSDVersion, :BuildNumber, :OSArchitecture, :WindowsDirectory, :OSLanguage, :CurrentTimeZone, :CountryCode, :InstallDate, :LastBootUpTime, :LocalDateTime)
     end
 
 
