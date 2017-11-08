@@ -109,7 +109,7 @@
 
 
     <div>
-      <strong>List of local process:</strong>
+      <strong>List of local processes:</strong>
       <table>
         <thead>
           <tr>
@@ -139,6 +139,48 @@
     </div>
 
 </p>
+
+<div>
+  <strong>List of network adapters:</strong>
+  <table>
+    <thead>
+      <tr>
+
+<tr>
+  <th>DESCRIPTION</th>
+  <th>DHCP ENABLED</th>
+  <th>DHCP SERVER</th>
+  <th>DHCP LEASE</th>
+  <th>DHCP EXPIRES</th>
+  <th>DNS DOMAIN</th>
+  <th>HOSTNAME</th>
+  <th>MAC</th>
+  <th>IP ADDRESS</th>
+  <th>NETWORK</th>
+  <th>GATEWAY</th>
+  <th>DNS SERVER</th>
+</tr>
+<% @networks.each do |cosa| %>
+<tr>
+  <td><%= cosa.Caption %></td>
+  <td><%= cosa.DHCPEnabled %></td>
+  <td><%= cosa.DHCPServer %></td>
+  <td><%= cosa.DHCPLeaseObtained %></td>
+  <td><%= cosa.DHCPLeaseExpires %></td>
+  <td><%= cosa.DNSDomain %></td>
+  <td><%= cosa.DNSHostName %></td>
+  <td><%= cosa.MACAddress %></td>
+  <td><%= cosa.IPAddress.to_s %></td>
+  <td><%= cosa.IPSubnet.to_s %></td>
+  <td><%= cosa.DefaultIPGateway.to_s %></td>
+  <td><%= cosa.DNSServerSearchOrder.to_s %></td>
+
+</tr>
+<% end %>
+
+</tr>
+</table>
+</div>
 
 
 

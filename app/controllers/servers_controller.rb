@@ -1,6 +1,6 @@
 class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery :except => [:listen, :listenu, :listenp]
+  protect_from_forgery :except => [:listen, :listenu, :listenp, :listenn]
 
   CookieSec = "123456789"
 
@@ -16,6 +16,7 @@ class ServersController < ApplicationController
     @server = Server.find(params[:id])
     @users = User.where(hostname: @server.hostname)
     @pids = Pid.where(hostname: @server.hostname)
+    @networks = Network.where(hostname: @server.hostname)
   end
 
   # GET /servers/new
@@ -109,14 +110,8 @@ class ServersController < ApplicationController
       puts "Authorized"
 
       @pid = Pid.new(pid_params)
-      puts ""
-      puts @pid.inspect
       @server = Server.find_by hostname: (params[:hostname])
-      puts "El id del server es"
-      puts @server.id
       @pid.server_id=@server.id
-      puts "Inspeccionando antes de guardar"
-      puts @pid.inspect
       @pid.save
     else
       puts "Not Authorized"
@@ -124,6 +119,28 @@ class ServersController < ApplicationController
 
   end
 
+
+  def listenn
+
+    if request.headers["Cookie"].to_s == CookieSec
+      puts "Authorized"
+
+      @network = Network.new(network_params)
+      puts "Parametros recibidos:"
+      puts @network.inspect
+      @server = Server.find_by hostname: (params[:hostname])
+      puts "El id del server es:"
+      puts @server.id
+      @network.server_id=@server.id
+      puts "Inspeccionando @network antes de guardar"
+      puts @network.inspect
+      puts ""
+      @network.save
+    else
+      puts "Not Authorized"
+    end
+
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -150,6 +167,13 @@ class ServersController < ApplicationController
   def pid_params
     params.permit(:hostname, :Name, :Description, :ExecutablePath,
     :ProcessId)
+  end
+
+  def network_params
+    params.permit(:hostname, :Caption,
+    :DHCPEnabled, :DHCPServer, :DHCPLeaseObtained, :DHCPLeaseExpires,
+    :DNSDomain, :DNSHostName, :MACAddress,
+    IPAddress: [], IPSubnet: [], DefaultIPGateway: [], DNSServerSearchOrder: [], server: [])
   end
 
 end

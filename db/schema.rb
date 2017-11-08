@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108045247) do
+ActiveRecord::Schema.define(version: 20171108141915) do
+
+  create_table "networks", force: :cascade do |t|
+    t.string "hostname"
+    t.string "Caption"
+    t.string "DHCPEnabled"
+    t.string "DHCPServer"
+    t.string "DHCPLeaseObtained"
+    t.string "DHCPLeaseExpires"
+    t.string "DNSDomain"
+    t.string "DNSHostName"
+    t.string "MACAddress"
+    t.string "IPAddress"
+    t.string "IPSubnet"
+    t.string "DefaultIPGateway"
+    t.string "DNSServerSearchOrder"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "server_id"
+    t.index ["server_id"], name: "index_networks_on_server_id"
+  end
 
   create_table "pids", force: :cascade do |t|
     t.string "hostname"

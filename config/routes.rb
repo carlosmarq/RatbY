@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post 'listen'
       post 'listenu'
       post 'listenp'
+      post 'listenn'
     end
   end
   #devise_for :models
