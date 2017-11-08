@@ -13,6 +13,9 @@ class ServersController < ApplicationController
   # GET /servers/1
   # GET /servers/1.json
   def show
+    @server = Server.find(params[:id])
+    @users = User.find_by(hostname: @server.hostname)
+    puts @users
   end
 
   # GET /servers/new
@@ -92,9 +95,9 @@ class ServersController < ApplicationController
       puts "Authorized"
 
       @user = User.new(user_params)
-      @user.server = Server.find_by "hostname", user_params[:hostname]
+      #@user = Server.find_by hostname: user_params[:hostname]
       puts ""
-      puts @user.server
+      puts @user
       puts ""
       @user.save
     else

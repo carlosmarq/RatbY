@@ -10,5 +10,82 @@
   <%= @server.Caption %>
 </p>
 
+<p>
+  <strong>CSD Version:</strong>
+  <%= @server.CSDVersion %>
+</p>
+
+<p>
+  <strong>Build Number:</strong>
+  <%= @server.BuildNumber %>
+</p>
+
+<p>
+  <strong>OS Architecture:</strong>
+  <%= @server.OSArchitecture %>
+</p>
+
+<p>
+  <strong>Windows Directory:</strong>
+  <%= @server.WindowsDirectory %>
+</p>
+
+<p>
+  <strong>OS Language:</strong>
+  <%= @server.OSLanguage %>
+</p>
+
+<p>
+  <strong>Current Time Zone:</strong>
+  <%= @server.CurrentTimeZone %>
+</p>
+
+<p>
+  <strong>Country Code:</strong>
+  <%= @server.CountryCode %>
+</p>
+
+<p>
+  <strong>Install Date:</strong>
+  <%= @server.InstallDate %>
+</p>
+
+<p>
+  <strong>Last Boot UpTime:</strong>
+  <%= @server.LastBootUpTime %>
+</p>
+
+<p>
+  <strong>Local Date Time:</strong>
+  <%= @server.LocalDateTime %>
+</p>
+
+<p>
+
+
+  <div class="container">
+    <strong>List of local users:</strong>
+    <table>
+      <thead>
+        <tr>
+          <th>@server.hostname users</th>
+        </tr>
+        <% @users.each do |cosa| %>
+          <tr>
+            <td><%= puts cosa %></td>
+
+
+          </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+
+</p>
+
+
+
+
 <%= link_to 'Edit', edit_server_path(@server) %> |
 <%= link_to 'Back', servers_path %>
