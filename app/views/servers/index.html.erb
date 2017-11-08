@@ -1,29 +1,59 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>RaTbY 0.1</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-<h1>Servers</h1>
+<div class="container">
+  <div class="jumbotron">
+    <h1>RaTby: </h1>
+    <p>A remote administration tool/Remote Access Trojan/ in Ruby</p>
+  </div>
+  <p> </p>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Hostname</th>
-      <th>Caption</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @servers.each do |server| %>
+<div class="container">
+  <h2>Remote Microsoft Windows devices</h2>
+  <p>The list of registered remote clients:</p>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= server.hostname %></td>
-        <td><%= server.Caption %></td>
-        <td><%= link_to 'Show', server %></td>
-        <td><%= link_to 'Edit', edit_server_path(server) %></td>
-        <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+          <th>Hostname</th>
+          <th>Caption</th>
+          <th colspan="3"></th>
+
+
+
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @servers.each do |server| %>
+        <tr>
+          <td><%= server.hostname %></td>
+          <td><%= server.Caption %></td>
+          <td><%= link_to 'Show', server %></td>
+          <td><%= link_to 'Edit', edit_server_path(server) %></td>
+          <td><%= link_to 'Destroy', server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
 
-<%= link_to 'New Server', new_server_path %>
+
+
+  </table>
+  <%= link_to 'New Server', new_server_path %>
+</div>
+
+
+
+</body>
+</html>

@@ -1,189 +1,242 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Hostname:</strong>
-  <%= @server.hostname %>
-</p>
-
-<p>
-  <strong>Caption:</strong>
-  <%= @server.Caption %>
-</p>
-
-<p>
-  <strong>CSD Version:</strong>
-  <%= @server.CSDVersion %>
-</p>
-
-<p>
-  <strong>Build Number:</strong>
-  <%= @server.BuildNumber %>
-</p>
-
-<p>
-  <strong>OS Architecture:</strong>
-  <%= @server.OSArchitecture %>
-</p>
-
-<p>
-  <strong>Windows Directory:</strong>
-  <%= @server.WindowsDirectory %>
-</p>
-
-<p>
-  <strong>OS Language:</strong>
-  <%= @server.OSLanguage %>
-</p>
-
-<p>
-  <strong>Current Time Zone:</strong>
-  <%= @server.CurrentTimeZone %>
-</p>
-
-<p>
-  <strong>Country Code:</strong>
-  <%= @server.CountryCode %>
-</p>
-
-<p>
-  <strong>Install Date:</strong>
-  <%= @server.InstallDate %>
-</p>
-
-<p>
-  <strong>Last Boot UpTime:</strong>
-  <%= @server.LastBootUpTime %>
-</p>
-
-<p>
-  <strong>Local Date Time:</strong>
-  <%= @server.LocalDateTime %>
-</p>
-
-<p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>RaTbY 0.1</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
 
-  <div>
-    <strong>List of local users:</strong>
-    <table>
-      <thead>
-        <tr>
 
-  <tr>
-    <th>USERNAME</th>
-    <th>DESCRIPTION</th>
-    <th>NAME</th>
-    <th>FULLNAME</th>
-    <th>LOCAL</th>
-    <th>LOCKOUT</th>
-    <th>DISABLED</th>
-    <th>PWD CHANGEABLE</th>
-    <th>PWD EXPIRES</th>
-    <th>PWD REQUIRED</th>
-    <th>SID</th>
-  </tr>
-  <% @users.each do |cosa| %>
-  <tr>
-    <td><%= cosa.Caption %></td>
-    <td><%= cosa.Description %></td>
-    <td><%= cosa.Name %></td>
-    <td><%= cosa.FullName %></td>
-    <td><%= cosa.LocalAccount %></td>
-    <td><%= cosa.Lockout %></td>
-    <td><%= cosa.Disabled %></td>
-    <td><%= cosa.PasswordChangeable %></td>
-    <td><%= cosa.PasswordExpires %></td>
-    <td><%= cosa.PasswordRequired %></td>
-    <td><%= cosa.SID %></td>
+<div class="container">
+  <div class="jumbotron">
+    <h1>RaTby: </h1>
+    <p>A remote administration tool/Remote Access Trojan/ in Ruby</p>
+  </div>
+  <p> </p>
+</div>
 
-  </tr>
-  <% end %>
-
-  </tr>
-</table>
+<div class="container">
 
 
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Hostname:</strong>
+    <%= @server.hostname %>
+  </p>
+
+  <p>
+    <strong>Caption:</strong>
+    <%= @server.Caption %>
+  </p>
+
+  <p>
+    <strong>CSD Version:</strong>
+    <%= @server.CSDVersion %>
+  </p>
+
+  <p>
+    <strong>Build Number:</strong>
+    <%= @server.BuildNumber %>
+  </p>
+
+  <p>
+    <strong>OS Architecture:</strong>
+    <%= @server.OSArchitecture %>
+  </p>
+
+  <p>
+    <strong>Windows Directory:</strong>
+    <%= @server.WindowsDirectory %>
+  </p>
+
+  <p>
+    <strong>OS Language:</strong>
+    <%= @server.OSLanguage %>
+  </p>
+
+  <p>
+    <strong>Current Time Zone:</strong>
+    <%= @server.CurrentTimeZone %>
+  </p>
+
+  <p>
+    <strong>Country Code:</strong>
+    <%= @server.CountryCode %>
+  </p>
+
+  <p>
+    <strong>Install Date:</strong>
+    <%= @server.InstallDate %>
+  </p>
+
+  <p>
+    <strong>Last Boot UpTime:</strong>
+    <%= @server.LastBootUpTime %>
+  </p>
+
+  <p>
+    <strong>Local Date Time:</strong>
+    <%= @server.LocalDateTime %>
+  </p>
 
 
   </div>
 
+  <div class="container">
+    <h2>Detailed information</h2>
+    <p>Technical host information</p>
 
-    <div>
-      <strong>List of local processes:</strong>
-      <table>
-        <thead>
-          <tr>
-
-    <tr>
-      <th>NAME</th>
-      <th>DESCRIPTION</th>
-      <th>EXECUTABLE PATH</th>
-      <th>PID</th>
-    </tr>
-    <% @pids.each do |cosa| %>
-    <tr>
-      <td><%= cosa.Name %></td>
-      <td><%= cosa.Description %></td>
-      <td><%= cosa.ExecutablePath %></td>
-      <td><%= cosa.ProcessId %></td>
-
-    </tr>
-    <% end %>
-
-    </tr>
-  </table>
+  <div class="container">
+    <h2>List of accounts</h2>
+    <p>Local and or Domain accounts registered in the Windows host:</p>
+    <table class="table table-striped">
+      <thead>
 
 
+        <tr>
+          <th>USERNAME</th>
+          <th>DESCRIPTION</th>
+          <th>NAME</th>
+          <th>FULLNAME</th>
+          <th>LOCAL</th>
+          <th>LOCKOUT</th>
+          <th>DISABLED</th>
+          <th>PWD CHANGEABLE</th>
+          <th>PWD EXPIRES</th>
+          <th>PWD REQUIRED</th>
+          <th>SID</th>
+        </tr>
 
+      </thead>
 
-    </div>
+      <tbody>
 
-</p>
-
-<div>
-  <strong>List of network adapters:</strong>
-  <table>
-    <thead>
+      </tr>
+      <% @users.each do |cosa| %>
       <tr>
+        <td><%= cosa.Caption %></td>
+        <td><%= cosa.Description %></td>
+        <td><%= cosa.Name %></td>
+        <td><%= cosa.FullName %></td>
+        <td><%= cosa.LocalAccount %></td>
+        <td><%= cosa.Lockout %></td>
+        <td><%= cosa.Disabled %></td>
+        <td><%= cosa.PasswordChangeable %></td>
+        <td><%= cosa.PasswordExpires %></td>
+        <td><%= cosa.PasswordRequired %></td>
+        <td><%= cosa.SID %></td>
 
-<tr>
-  <th>DESCRIPTION</th>
-  <th>DHCP ENABLED</th>
-  <th>DHCP SERVER</th>
-  <th>DHCP LEASE</th>
-  <th>DHCP EXPIRES</th>
-  <th>DNS DOMAIN</th>
-  <th>HOSTNAME</th>
-  <th>MAC</th>
-  <th>IP ADDRESS</th>
-  <th>NETWORK</th>
-  <th>GATEWAY</th>
-  <th>DNS SERVER</th>
-</tr>
-<% @networks.each do |cosa| %>
-<tr>
-  <td><%= cosa.Caption %></td>
-  <td><%= cosa.DHCPEnabled %></td>
-  <td><%= cosa.DHCPServer %></td>
-  <td><%= cosa.DHCPLeaseObtained %></td>
-  <td><%= cosa.DHCPLeaseExpires %></td>
-  <td><%= cosa.DNSDomain %></td>
-  <td><%= cosa.DNSHostName %></td>
-  <td><%= cosa.MACAddress %></td>
-  <td><%= cosa.IPAddress.to_s %></td>
-  <td><%= cosa.IPSubnet.to_s %></td>
-  <td><%= cosa.DefaultIPGateway.to_s %></td>
-  <td><%= cosa.DNSServerSearchOrder.to_s %></td>
+      </tr>
+      <% end %>
 
-</tr>
-<% end %>
-
-</tr>
-</table>
-</div>
+      </tbody>
+    </table>
+  </div>
 
 
+  <div class="container">
+    <h2>Running process</h2>
+    <p>Running process in the Windows host:</p>
+    <table class="table table-striped">
+      <thead>
 
 
-<%= link_to 'Edit', edit_server_path(@server) %> |
-<%= link_to 'Back', servers_path %>
+        <tr>
+          <th>NAME</th>
+          <th>DESCRIPTION</th>
+          <th>EXECUTABLE PATH</th>
+          <th>PID</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+      </tr>
+      <% @pids.each do |cosa| %>
+      <tr>
+        <td><%= cosa.Name %></td>
+        <td><%= cosa.Description %></td>
+        <td><%= cosa.ExecutablePath %></td>
+        <td><%= cosa.ProcessId %></td>
+
+      </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="container">
+    <h2>Running process</h2>
+    <p>Running process in the Windows host:</p>
+    <table class="table table-striped">
+      <thead>
+
+
+        <tr>
+          <th>DESCRIPTION</th>
+          <th>DHCP ENABLED</th>
+          <th>DHCP SERVER</th>
+          <th>DHCP LEASE</th>
+          <th>DHCP EXPIRES</th>
+          <th>DNS DOMAIN</th>
+          <th>HOSTNAME</th>
+          <th>MAC</th>
+          <th>IP ADDRESS</th>
+          <th>NETWORK</th>
+          <th>GATEWAY</th>
+          <th>DNS SERVER</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+      </tr>
+      <% @networks.each do |cosa| %>
+      <tr>
+        <td><%= cosa.Caption %></td>
+        <td><%= cosa.DHCPEnabled %></td>
+        <td><%= cosa.DHCPServer %></td>
+        <td><%= cosa.DHCPLeaseObtained %></td>
+        <td><%= cosa.DHCPLeaseExpires %></td>
+        <td><%= cosa.DNSDomain %></td>
+        <td><%= cosa.DNSHostName %></td>
+        <td><%= cosa.MACAddress %></td>
+        <td><%= cosa.IPAddress.to_s %></td>
+        <td><%= cosa.IPSubnet.to_s %></td>
+        <td><%= cosa.DefaultIPGateway.to_s %></td>
+        <td><%= cosa.DNSServerSearchOrder.to_s %></td>
+
+      </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+
+    <%= link_to 'Edit', edit_server_path(@server) %> |
+    <%= link_to 'Back', servers_path %>
+  </div>
+
+  <ul class="pagination">
+      <li><a href="#">1</a></li>
+      <li><a href="#2">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+    </ul>
+  </div>
+
+</body>
+</html>
