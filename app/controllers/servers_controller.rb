@@ -1,6 +1,6 @@
 class ServersController < ApplicationController
   before_action :set_server, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery :except => [:listen, :listenu]
+  protect_from_forgery :except => [:listen, :listenu, :listenp]
 
   CookieSec = "123456789"
 
@@ -15,7 +15,7 @@ class ServersController < ApplicationController
   def show
     @server = Server.find(params[:id])
     @users = User.where(hostname: @server.hostname)
-    puts @users.inspect
+    @pids = Pid.where(hostname: @server.hostname)
   end
 
   # GET /servers/new
@@ -95,16 +95,29 @@ class ServersController < ApplicationController
       puts "Authorized"
 
       @user = User.new(user_params)
-      #@user = Server.find_by hostname: user_params[:hostname]
+      @server = Server.find_by hostname: (params[:hostname])
+      @user.server_id=@server.id
+      @user.save
+    else
+      puts "Not Authorized"
+    end
+  end
+
+  def listenp
+
+    if request.headers["Cookie"].to_s == CookieSec
+      puts "Authorized"
+
+      @pid = Pid.new(pid_params)
       puts ""
-      puts @user.inspect
+      puts @pid.inspect
       @server = Server.find_by hostname: (params[:hostname])
       puts "El id del server es"
       puts @server.id
-      @user.server_id=@server.id
-      puts ""
-      puts @user.inspect
-      @user.save
+      @pid.server_id=@server.id
+      puts "Inspeccionando antes de guardar"
+      puts @pid.inspect
+      @pid.save
     else
       puts "Not Authorized"
     end
@@ -121,16 +134,22 @@ class ServersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def server_params
     params.require(:server).permit(:hostname, :Caption, :CSDVersion,
-      :BuildNumber, :OSArchitecture, :WindowsDirectory, :OSLanguage,
-      :CurrentTimeZone, :CountryCode, :InstallDate, :LastBootUpTime,
-      :LocalDateTime)
+    :BuildNumber, :OSArchitecture, :WindowsDirectory, :OSLanguage,
+    :CurrentTimeZone, :CountryCode, :InstallDate, :LastBootUpTime,
+    :LocalDateTime)
   end
 
 
   def user_params
-        params.permit(:hostname, :Caption, :Description, :Disabled,
-        :FullName, :LocalAccount, :Lockout, :Name,
-        :PasswordChangeable, :PasswordExpires, :PasswordRequired,
-        :SID, :server_id, :server)
+    params.permit(:hostname, :Caption, :Description, :Disabled,
+    :FullName, :LocalAccount, :Lockout, :Name,
+    :PasswordChangeable, :PasswordExpires, :PasswordRequired,
+    :SID, :server_id, :server)
   end
+
+  def pid_params
+    params.permit(:hostname, :Name, :Description, :ExecutablePath,
+    :ProcessId)
+  end
+
 end

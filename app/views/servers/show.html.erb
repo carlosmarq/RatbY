@@ -68,7 +68,7 @@
     <table>
       <thead>
         <tr>
-    
+
   <tr>
     <th>USERNAME</th>
     <th>DESCRIPTION</th>
@@ -104,9 +104,39 @@
 
 
 
-      </tbody>
-    </table>
+
   </div>
+
+
+    <div>
+      <strong>List of local process:</strong>
+      <table>
+        <thead>
+          <tr>
+
+    <tr>
+      <th>NAME</th>
+      <th>DESCRIPTION</th>
+      <th>EXECUTABLE PATH</th>
+      <th>PID</th>
+    </tr>
+    <% @pids.each do |cosa| %>
+    <tr>
+      <td><%= cosa.Name %></td>
+      <td><%= cosa.Description %></td>
+      <td><%= cosa.ExecutablePath %></td>
+      <td><%= cosa.ProcessId %></td>
+
+    </tr>
+    <% end %>
+
+    </tr>
+  </table>
+
+
+
+
+    </div>
 
 </p>
 

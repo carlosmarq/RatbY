@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104154400) do
+ActiveRecord::Schema.define(version: 20171108045247) do
+
+  create_table "pids", force: :cascade do |t|
+    t.string "hostname"
+    t.string "Name"
+    t.string "Description"
+    t.string "ExecutablePath"
+    t.string "ProcessId"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "server_id"
+    t.index ["server_id"], name: "index_pids_on_server_id"
+  end
 
   create_table "servers", force: :cascade do |t|
     t.string "hostname"

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       post 'listen'
       post 'listenu'
+      post 'listenp'
     end
   end
   #devise_for :models
