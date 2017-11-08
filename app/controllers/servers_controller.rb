@@ -14,8 +14,8 @@ class ServersController < ApplicationController
   # GET /servers/1.json
   def show
     @server = Server.find(params[:id])
-    @users = User.find_by(hostname: @server.hostname)
-    puts @users
+    @users = User.where(hostname: @server.hostname)
+    puts @users.inspect
   end
 
   # GET /servers/new
@@ -97,8 +97,13 @@ class ServersController < ApplicationController
       @user = User.new(user_params)
       #@user = Server.find_by hostname: user_params[:hostname]
       puts ""
-      puts @user
+      puts @user.inspect
+      @server = Server.find_by hostname: (params[:hostname])
+      puts "El id del server es"
+      puts @server.id
+      @user.server_id=@server.id
       puts ""
+      puts @user.inspect
       @user.save
     else
       puts "Not Authorized"
@@ -123,9 +128,9 @@ class ServersController < ApplicationController
 
 
   def user_params
-        params.require(:server).permit(:hostname, :Caption, :Description, :Disabled,
+        params.permit(:hostname, :Caption, :Description, :Disabled,
         :FullName, :LocalAccount, :Lockout, :Name,
         :PasswordChangeable, :PasswordExpires, :PasswordRequired,
-        :SID)
+        :SID, :server_id, :server)
   end
 end
